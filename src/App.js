@@ -45,7 +45,7 @@ function App() {
       setAccount(accounts[0])
     }
   
-    web3Api.web3 && getAccounts()
+    web3Api.web3 && getAccount()
   }, [web3Api.web3])
 
   return (
