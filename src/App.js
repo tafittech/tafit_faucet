@@ -45,8 +45,7 @@ function App() {
         Congratulation<strong> YOU WON</strong> !!!
         </div>
         <b>Pay to Play:</b><strong> 0.001</strong> ETH
-        <div>
-          
+        <div>    
       <button className="btn mr-2">Pay Here</button>
       </div>
      </div>
