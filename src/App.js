@@ -41,7 +41,7 @@ function App() {
 
   return (
     <>
-    <div className="tafit-lottery-wapper">
+    <div className="tafit-lottery-wrapper">
       <div className="Tafit Lottery">
         <div className=" is-flex is-align-items-center">
           <span>
