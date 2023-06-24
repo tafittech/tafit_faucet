@@ -15,6 +15,12 @@ function App() {
 
       if (window.ethereum) {
         provider = window.ethereum;
+
+        try {
+          await provider.enable();
+        } catch {
+          console.error("User denied account access")
+        }
       }
       else if (window.web3) {
         provider = window.web3;
@@ -40,11 +46,7 @@ function App() {
         </div>
         <b>Pay to Play:</b><strong> 0.001</strong> ETH
         <div>
-          <button className="btn mr-2"
-          onClick={async () => {
-            const accounts = await window.ethereum.request({method:"eth_requestAccounts"})
-            console.log(accounts)
-          }}>Check Funds</button>
+          
       <button className="btn mr-2">Pay Here</button>
       </div>
      </div>
