@@ -17,13 +17,14 @@ function App() {
   useEffect(() =>{
     const loadProvider = async () => {
       const provider = await detectEthereumProvider()
-      const {contract} = await loadContract("tafitLottery")
+      const contract = await loadContract("tafitLottery")
 
-      if (provider) {
-        //provider.request({method:"eth_requestAccounts"})
+      
+      if (provider){ 
         setWebApi({
         web3: new Web3(provider),
-        provider
+        provider,
+        contract
         })
       } else {
         console.error("PLease, install Metamask")
@@ -44,7 +45,7 @@ function App() {
 
   return (
     <>
-    <div className="tafit-lottery-wapper">
+    <div className="tafit-lottery-wrapper">
       <div className="Tafit Lottery">
         <div className=" is-flex is-align-items-center">
           <span>
