@@ -1,18 +1,27 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
+import Web3 from 'web3';
 
 
 function App() {
+  const [web3Api, setWebApi] = useState({
+    provider: null,
+    web3: null
+  })
 
   useEffect(() =>{
     const loadProvider = async () => {
-    // Metamask have access to windows.ethereum & to window.web3
-    // metamask injects a global API into website
-    // this API allows websites to request users, account,
-    //read data to Blockchain, send messages and Transactions
+      let provider = null;
 
-    console.log(window.web3)
-    console.log(window.ethereum)
+      if (window.ethereum) {
+        provider = window.ethereum;
+      }
+      else if (window.web3) {
+        provider = window.web3;
+      }
+      else if (!process.env.production) {
+        provider = new Web3.providers.HttpProvider("http://localhost:7545")
+      }
     }
 
     loadProvider()
