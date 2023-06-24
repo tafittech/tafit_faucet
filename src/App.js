@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import Web3 from 'web3';
+import detectEthereumProvider from '@metamask/detect-provider';
 
 
 function App() {
@@ -13,27 +14,17 @@ function App() {
 
   useEffect(() =>{
     const loadProvider = async () => {
-      let provider = null;
+      const provider = await detectEthereumProvider()
 
-      if (window.ethereum) {
-        provider = window.ethereum;
-
-        try {
-          await provider.enable();
-        } catch {
-          console.error("User denied account access")
-        }
-      }
-      else if (window.web3) {
-        provider = window.web3;
-      }
-      else if (!process.env.production) {
-        provider = new Web3.providers.HttpProvider("http://localhost:7545")
-      }
-      setWebApi({
+      if (provider) {
+        //provider.request({method:"eth_requestAccounts"})
+        setWebApi({
         web3: new Web3(provider),
         provider
-      })
+        })
+      } else {
+        console.error("PLease, install Metamask")
+      }
     }
 
     loadProvider()
@@ -52,18 +43,29 @@ function App() {
     <>
     <div className="tafit-lottery-wapper">
       <div className="Tafit Lottery">
-        <span>
-          <strong>Account:</strong>
-        </span>
+        <div className=" is-flex is-align-items-center">
+          <span>
+          <strong className=" mr-2">Account:</strong>
+          </span>
         <h1>
-          {account ? account : "not connected"}
+          {account ? <div>{account}</div> : 
+          <button className="button is-info"
+            onClick={() =>
+              web3Api.provider.request({method:"eth_requestAccounts"}
+              )}
+          >
+            Connect Wallet
+          </button>
+          }
         </h1>
+
+        </div>
         <div className="balance-view is-size-2">
         Congratulation<strong> YOU WON</strong> !!!
         </div>
         <b>Pay to Play:</b><strong> 0.001</strong> ETH
         <div>    
-      <button className="btn mr-2">Pay Here</button>
+      <button className="button is-primary  is-active">Pay Here</button>
       </div>
      </div>
     </div>
