@@ -41,7 +41,7 @@ function App() {
 
   useEffect (() =>{
     const getAccount = async () => {
-      const accounts = await web3Api.web3.ethereum.getAccounts()
+      const accounts = await web3Api.web3.eth.getAccounts()
       setAccount(accounts[0])
     }
   
