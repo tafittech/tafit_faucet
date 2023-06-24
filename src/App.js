@@ -10,6 +10,9 @@ function App() {
     // metamask injects a global API into website
     // this API allows websites to request users, account,
     //read data to Blockchain, send messages and Transactions
+
+    console.log(window.web3)
+    console.log(window.ethereum)
     }
 
     loadProvider()
@@ -24,6 +27,11 @@ function App() {
         </div>
         <b>Pay to Play:</b><strong> 0.001</strong> ETH
         <div>
+          <button className="btn mr-2"
+          onClick={async () => {
+            const accounts = await window.ethereum.request({method:"eth_requestAccounts"})
+            console.log(accounts)
+          }}>Check Funds</button>
       <button className="btn mr-2">Pay Here</button>
       </div>
      </div>
