@@ -10,6 +10,7 @@ function App() {
     web3: null
   })
 
+  const [balance, setbalance] = useState(null)
   const [account, setAccount] = useState(null)
 
   useEffect(() =>{
@@ -29,6 +30,17 @@ function App() {
 
     loadProvider()
   }, [])
+
+  useEffect(() => {
+    const loadBalance = async () => {
+      const{ contract, web3} = web3Api
+      const balance = await web3.eth.getbalance(contract.address)
+      setbalance(balance)
+      
+    }
+
+    web3Api.contract && loadBalance()
+  }, [web3Api])
 
   useEffect (() =>{
     const getAccount = async () => {
