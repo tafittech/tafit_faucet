@@ -9,6 +9,8 @@ function App() {
     web3: null
   })
 
+  const [account, setAccount] = useState(null)
+
   useEffect(() =>{
     const loadProvider = async () => {
       let provider = null;
@@ -37,10 +39,25 @@ function App() {
     loadProvider()
   }, [])
 
+  useEffect (() =>{
+    const getAccount = async () => {
+      const accounts = await web3Api.web3.ethereum.getAccounts()
+      setAccount(accounts[0])
+    }
+  
+    web3Api.web3 && getAccounts()
+  }, [web3Api.web3])
+
   return (
     <>
     <div className="tafit-lottery-wapper">
       <div className="Tafit Lottery">
+        <span>
+          <strong>Account:</strong>
+        </span>
+        <h1>
+          {account ? account : "not connected"}
+        </h1>
         <div className="balance-view is-size-2">
         Congratulation<strong> YOU WON</strong> !!!
         </div>
