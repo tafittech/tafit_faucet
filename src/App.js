@@ -37,6 +37,15 @@ function App() {
       const balance = await web3.eth.getbalance(contract.address)
       setbalance(balance)
       
+    
+      if (balance) {
+        
+        setWebApi({
+        getbalance:web3Api.eth.request({method:"eth_requestAccounts"})
+        })
+      } else {
+        console.error("PLease, install Metamask")
+      }
     }
 
     web3Api.contract && loadBalance()
@@ -50,6 +59,8 @@ function App() {
   
     web3Api.web3 && getAccount()
   }, [web3Api.web3])
+  
+  // useEffect(() =>{},[])
 
   return (
     <div className="tafit-lottery-wrapper">
