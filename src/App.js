@@ -52,7 +52,6 @@ function App() {
   }, [web3Api.web3])
 
   return (
-    <>
     <div className="tafit-lottery-wrapper">
       <div className="Tafit Lottery">
         <div className=" is-flex is-align-items-center">
@@ -73,7 +72,7 @@ function App() {
 
         </div>
         <div className="balance-view is-size-2">
-        Congratulation<strong> YOU WON</strong> !!!
+        Congratulation<strong> {balance}YOU WON</strong> !!!
         </div>
         <b>Pay to Play:</b><strong> 0.001</strong> ETH
         <div>    
@@ -81,7 +80,6 @@ function App() {
       </div>
      </div>
     </div>
-    </>
   );
 }
 
