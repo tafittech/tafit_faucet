@@ -51,8 +51,9 @@ contract TafitInvestments{
     function investment()public payable{
         require(block.timestamp<deadline, "Deadline has passed");
         require(msg.value>=minimumInvestments, "Minium Investment required 100 wei");
+        
 
-        if (investors[msg.sender]==0){
+        if(investors[msg.sender]==0){
             noOfInvestors++;
         }
         investors[msg.sender]+=msg.value;
@@ -77,6 +78,14 @@ contract TafitInvestments{
         require(thisRequest.vote[msg.sender]==false, "You have already voted");
         thisRequest.vote[msg.sender]=true;
         thisRequest.noOfvoters++;
+    }
+    function makePayment(uint _requestNo) public onlyManager(){
+        require(totalInvestments>=project, "Project goal was not reached");
+        Request storage thisRequest= requests[_requestNo];
+        require(thisRequest.completed==false, "The request has not been completed");
+        require(thisRequest.noOfvoters>noOfInvestors/2, "Majority does not support the Request");
+        thisRequest.recipient.transfer(thisRequest.value);
+        thisRequest.completed=true;
 
     }
 }
