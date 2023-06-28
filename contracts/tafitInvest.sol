@@ -71,10 +71,12 @@ contract TafitInvestments{
 
     }
 
-    function voteRequest(uint _requestNo) public view  {
+    function voteRequest(uint _requestNo) public {
         require(investors[msg.sender]>0, "You are not a contributor");
         Request storage thisRequest = requests[_requestNo];
         require(thisRequest.vote[msg.sender]==false, "You have already voted");
+        thisRequest.vote[msg.sender]=true;
+        thisRequest.noOfvoters++;
 
     }
 }
