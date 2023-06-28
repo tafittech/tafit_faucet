@@ -19,7 +19,7 @@ contract TafitInvestments{
     mapping(uint=>Request) public requests;
     uint public numRequests;
     address public manager;
-    uint public minimumInvestments;
+    uint public minimumInvestment;
     uint public deadline;
     uint public project;
     uint public totalInvestments;
@@ -28,7 +28,7 @@ contract TafitInvestments{
     constructor(uint _project,uint _deadline){
         project=_project;
         deadline=block.timestamp+_deadline;//500 sec + 60 sec = 560 sec
-        minimumInvestments = 100 wei;
+        minimumInvestment = 100 wei;
         manager=msg.sender;
 
     }
@@ -50,8 +50,8 @@ contract TafitInvestments{
 
     function investment()public payable{
         require(block.timestamp<deadline, "Deadline has passed");
-        require(msg.value>=minimumInvestments, "Minium Investment required 100 wei");
-        
+        require(msg.value>=minimumInvestment, "Minium Investment required 100 wei");
+
 
         if(investors[msg.sender]==0){
             noOfInvestors++;
